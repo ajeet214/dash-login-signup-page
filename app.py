@@ -1,53 +1,96 @@
 import dash
 from dash import html, dcc, Input, Output, State
+import dash_bootstrap_components as dbc
 from utils import check_user, user_exists, add_user, reset_password
 
-app = dash.Dash(__name__, suppress_callback_exceptions=True)
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
+
 server = app.server
 
 app.layout = html.Div(id='page-content')
 
 # Login Page Layout
-login_layout = html.Div([
-    html.H2("Login"),
-    dcc.Input(id='login-username', type='text', placeholder='Username'),
-    dcc.Input(id='login-password', type='password', placeholder='Password'),
-    html.Br(),
-    html.A("Forgot Password?", href="/forgot-password"),
-    html.Br(),
-    html.Button("Login", id='login-button'),
-    html.Div(id='login-output'),
-    html.Br(),
-    html.A("Sign Up", href="/signup")
-])
+login_layout = dbc.Container([
+    dbc.Row([
+        dbc.Col([
+            dbc.Card([
+                dbc.CardBody([
+                    html.H3("Login", className="text-center mb-4"),
+
+                    dbc.Input(id='login-username', placeholder="Username", type="text", className="mb-3"),
+                    dbc.Input(id='login-password', placeholder="Password", type="password", className="mb-2"),
+
+                    html.Div([
+                        html.A("Forgot Password?", href="/forgot-password", className="text-decoration-none")
+                    ], className="mb-3 text-end"),
+
+                    dbc.Button("Login", id='login-button', color="primary", className="w-100 mb-3"),
+
+                    html.Div(id='login-output', className="text-danger text-center mb-2"),
+
+                    html.Div([
+                        html.Span("Don't have an account? "),
+                        html.A("Sign Up", href="/signup", className="text-decoration-none")
+                    ], className="text-center")
+                ])
+            ], className="shadow p-4")
+        ], width=4)
+    ], justify="center", align="center", className="vh-100")
+], fluid=True)
+
 
 # Signup Page Layout
-signup_layout = html.Div([
-    html.H2("Sign Up"),
-    dcc.Input(id='signup-username', type='text', placeholder='Username'),
-    dcc.Input(id='signup-password', type='password', placeholder='Password'),
-    dcc.Input(id='signup-email', type='email', placeholder='Email'),
-    dcc.Input(id='signup-code', type='text', placeholder='Code'),
-    dcc.Input(id='signup-branch', type='text', placeholder='Branch'),
-    html.Br(),
-    html.Button("Sign Up", id='signup-button'),
-    html.Div(id='signup-output'),
-    html.Br(),
-    html.A("Back to Login", href="/")
-])
+signup_layout = dbc.Container([
+    dbc.Row([
+        dbc.Col([
+            dbc.Card([
+                dbc.CardBody([
+                    html.H3("Sign Up", className="text-center mb-4"),
+
+                    dbc.Input(id='signup-username', placeholder="Username", type="text", className="mb-3"),
+                    dbc.Input(id='signup-password', placeholder="Password", type="password", className="mb-3"),
+                    dbc.Input(id='signup-email', placeholder="Email", type="email", className="mb-3"),
+                    dbc.Input(id='signup-code', placeholder="Code", type="text", className="mb-3"),
+                    dbc.Input(id='signup-branch', placeholder="Branch", type="text", className="mb-4"),
+
+                    dbc.Button("Sign Up", id='signup-button', color="success", className="w-100 mb-3"),
+
+                    html.Div(id='signup-output', className="text-danger text-center mb-2"),
+
+                    html.Div([
+                        html.Span("Already have an account? "),
+                        html.A("Login", href="/", className="text-decoration-none")
+                    ], className="text-center")
+                ])
+            ], className="shadow p-4")
+        ], width=4)
+    ], justify="center", align="center", className="vh-100")
+], fluid=True)
 
 # Forgot Password Layout
-forgot_layout = html.Div([
-    html.H2("Reset Password"),
-    dcc.Input(id='fp-username', type='text', placeholder='Username'),
-    dcc.Input(id='fp-password', type='password', placeholder='New Password'),
-    dcc.Input(id='fp-confirm-password', type='password', placeholder='Confirm New Password'),
-    html.Br(),
-    html.Button("Set New Password", id='fp-button'),
-    html.Div(id='fp-output'),
-    html.Br(),
-    html.A("Back to Login", href="/")
-])
+forgot_password_layout = dbc.Container([
+    dbc.Row([
+        dbc.Col([
+            dbc.Card([
+                dbc.CardBody([
+                    html.H3("Reset Password", className="text-center mb-4"),
+
+                    dbc.Input(id='reset-username', placeholder="Username", type="text", className="mb-3"),
+                    dbc.Input(id='reset-new-password', placeholder="New Password", type="password", className="mb-3"),
+                    dbc.Input(id='reset-confirm-password', placeholder="Confirm New Password", type="password", className="mb-4"),
+
+                    dbc.Button("Set New Password", id='reset-button', color="warning", className="w-100 mb-3"),
+
+                    html.Div(id='reset-output', className="text-danger text-center mb-2"),
+
+                    html.Div([
+                        html.A("Back to Login", href="/", className="text-decoration-none")
+                    ], className="text-center")
+                ])
+            ], className="shadow p-4")
+        ], width=4)
+    ], justify="center", align="center", className="vh-100")
+], fluid=True)
 
 # Profile Layout (To be defined later)
 profile_layout = html.Div([
@@ -64,7 +107,7 @@ def display_page(pathname):
     if pathname == '/signup':
         return signup_layout
     elif pathname == '/forgot-password':
-        return forgot_layout
+        return forgot_password_layout
     elif pathname == '/profile':
         return profile_layout
     return login_layout
