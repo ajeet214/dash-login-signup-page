@@ -8,7 +8,11 @@ app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_
 
 server = app.server
 
-app.layout = html.Div(id='page-content')
+# URL Routing Component
+app.layout = html.Div([
+    dcc.Location(id='url', refresh=False),
+    html.Div(id='page-content')
+])
 
 # Login Page Layout
 login_layout = dbc.Container([
@@ -193,8 +197,8 @@ def reset_user_password(n, username, new_password, confirm_password):
 
 
 @app.callback(
-    Output('username-error', 'children'),
-    Output('password-error', 'children'),
+    Output('signup-username-error', 'children'),
+    Output('signup-password-error', 'children'),
     Output('signup-button', 'disabled'),
     Input('signup-username', 'value'),
     Input('signup-password', 'value'),
@@ -269,12 +273,6 @@ def validate_forgot_password_fields(new_pwd, confirm_pwd):
 
     return new_pwd_error, confirm_pwd_error, disable_button
 
-
-# URL Routing Component
-app.layout = html.Div([
-    dcc.Location(id='url', refresh=False),
-    html.Div(id='page-content')
-])
 
 if __name__ == '__main__':
     app.run(debug=True)
