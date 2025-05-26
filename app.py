@@ -181,11 +181,11 @@ def signup_user(n_clicks, username, password, email, code, branch):
 
 # Forgot Password Callback
 @app.callback(
-    Output('fp-output', 'children'),
-    Input('fp-button', 'n_clicks'),
-    State('fp-username', 'value'),
-    State('fp-password', 'value'),
-    State('fp-confirm-password', 'value'),
+    Output('forgot-password-output', 'children'),
+    Input('set-password-button', 'n_clicks'),
+    State('forgot-username', 'value'),
+    State('new-password', 'value'),
+    State('confirm-password', 'value'),
     prevent_initial_call=True
 )
 def reset_user_password(n, username, new_password, confirm_password):
