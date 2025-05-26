@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 
-EXCEL_PATH = "users.xlsx"
+EXCEL_PATH = "assets\\users.xlsx"
 
 
 def read_users():
@@ -40,7 +40,6 @@ def add_user(username, password, email, code, branch):
     df = pd.concat([df, new_user], ignore_index=True)
     save_users(df)
     return True
-
 
 
 def reset_password(username, new_password):
