@@ -14,19 +14,17 @@ app.layout = html.Div(id='page-content')
 login_layout = dbc.Container([
     dbc.Row([
         dbc.Col([
+            html.Img(src='/assets/logo.png', className="logo-img"),  # Add logo
             dbc.Card([
                 dbc.CardBody([
                     html.H3("Login", className="text-center mb-4"),
 
-                    dbc.Input(id='login-username', placeholder="Username", type="text", className="mb-3"),
+                    dbc.Input(id='login-username', placeholder="Username", type="text", className="mb-2"),
                     dbc.Input(id='login-password', placeholder="Password", type="password", className="mb-2"),
 
-                    html.Div([
-                        html.A("Forgot Password?", href="/forgot-password", className="text-decoration-none")
-                    ], className="mb-3 text-end"),
+                    html.Div(html.A("Forgot Password?", href="/forgot-password"), className="text-end mb-2"),
 
                     dbc.Button("Login", id='login-button', color="primary", className="w-100 mb-3"),
-
                     html.Div(id='login-output', className="text-danger text-center mb-2"),
 
                     html.Div([
@@ -34,7 +32,7 @@ login_layout = dbc.Container([
                         html.A("Sign Up", href="/signup", className="text-decoration-none")
                     ], className="text-center")
                 ])
-            ], className="shadow p-4")
+            ], className="shadow p-4 card-center")
         ], width=4)
     ], justify="center", align="center", className="vh-100")
 ], fluid=True)
@@ -44,22 +42,22 @@ login_layout = dbc.Container([
 signup_layout = dbc.Container([
     dbc.Row([
         dbc.Col([
+            html.Img(src='/assets/logo.png', className="logo-img"),  # Logo
             dbc.Card([
                 dbc.CardBody([
                     html.H3("Sign Up", className="text-center mb-4"),
 
                     dbc.Input(id='signup-username', placeholder="Username", type="text", className="mb-2"),
-                    html.Div(id='username-error', className="text-danger mb-2", style={"fontSize": "0.9rem"}),
+                    html.Div(id='signup-username-error', className="text-danger mb-2", style={"fontSize": "0.9rem"}),
 
                     dbc.Input(id='signup-password', placeholder="Password", type="password", className="mb-2"),
-                    html.Div(id='password-error', className="text-danger mb-2", style={"fontSize": "0.9rem"}),
+                    html.Div(id='signup-password-error', className="text-danger mb-2", style={"fontSize": "0.9rem"}),
 
                     dbc.Input(id='signup-email', placeholder="Email", type="email", className="mb-2"),
                     dbc.Input(id='signup-code', placeholder="Code", type="text", className="mb-2"),
-                    dbc.Input(id='signup-branch', placeholder="Branch", type="text", className="mb-4"),
+                    dbc.Input(id='signup-branch', placeholder="Branch", type="text", className="mb-3"),
 
                     dbc.Button("Sign Up", id='signup-button', color="success", className="w-100 mb-3", disabled=True),
-
                     html.Div(id='signup-output', className="text-danger text-center mb-2"),
 
                     html.Div([
@@ -67,7 +65,7 @@ signup_layout = dbc.Container([
                         html.A("Login", href="/", className="text-decoration-none")
                     ], className="text-center")
                 ])
-            ], className="shadow p-4")
+            ], className="shadow p-4 card-center")
         ], width=4)
     ], justify="center", align="center", className="vh-100")
 ], fluid=True)
@@ -76,6 +74,7 @@ signup_layout = dbc.Container([
 forgot_password_layout = dbc.Container([
     dbc.Row([
         dbc.Col([
+            html.Img(src='/assets/logo.png', className="logo-img"),  # Logo
             dbc.Card([
                 dbc.CardBody([
                     html.H3("Reset Password", className="text-center mb-4"),
@@ -97,7 +96,7 @@ forgot_password_layout = dbc.Container([
                         html.A("Login", href="/", className="text-decoration-none")
                     ], className="text-center")
                 ])
-            ], className="shadow p-4")
+            ], className="shadow p-4 card-center")
         ], width=4)
     ], justify="center", align="center", className="vh-100")
 ], fluid=True)
