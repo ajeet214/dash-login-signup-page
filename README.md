@@ -1,1 +1,1 @@
-# dash_login_signup_page
+# dash-login-signup-page
